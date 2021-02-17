@@ -44,7 +44,20 @@ const getRandomTime = () => {
   }
 };
 
-const getRandomDay = () => Math.floor(Math.random() * 28) + 1;
+const getRandomWeekday = () => {
+  let day;
+  while (true) {
+    day = Math.floor(Math.random() * 28);
+    if (
+      (day > 0 && day < 6) ||
+      (day > 7 && day < 13) ||
+      (day > 14 && day < 20) ||
+      (day > 21 && day < 27)
+    ) {
+      return day;
+    }
+  }
+};
 
 const addDentist = () => {
   const person = generatePerson();
@@ -96,7 +109,7 @@ const getRandomPerson = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const generateRandomAppointment = (people) => {
   const appointment = {
     id: `appointment${createId()}`,
-    day: getRandomDay(),
+    day: getRandomWeekday(),
     time: getRandomTime(),
     patient: getRandomPerson(people.patients).personId,
     dentist: getRandomPerson(people.dentists).personId,
