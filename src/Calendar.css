@@ -10,6 +10,10 @@
   font-size: 1.3rem;
 }
 
+.text-red {
+  color: red;
+}
+
 .calendarview .header div {
   padding: 0.5rem;
 }
@@ -32,4 +36,9 @@
 
 .calendarview .time {
   color: yellowgreen;
+}
+
+.calendarview .dentist-sick {
+  color: rgb(205, 50, 50);
+  text-decoration: line-through;
 }

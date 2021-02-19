@@ -14,6 +14,8 @@ class Main extends Component {
 
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.addAppointment = this.addAppointment.bind(this);
+    this.deleteAppointment = this.deleteAppointment.bind(this);
+    this.makePatientSick = this.makePatientSick.bind(this);
   }
 
   addDentist = (dentist) => {
@@ -30,16 +32,18 @@ class Main extends Component {
     );
 
     if (indexOfDentist !== -1) {
+      let dentistList = [...this.state.dentists];
+      let healthStatus = dentistList[indexOfDentist].isSick;
+
       this.setState((prevState) => {
-        let dentistList = [...prevState.dentists];
-        dentistList[indexOfDentist].isSick = !dentistList[indexOfDentist].isSick
-          .value;
+        dentistList[indexOfDentist].isSick = !healthStatus;
         let newState = { ...prevState, dentists: dentistList };
-        console.log(indexOfDentist);
         return newState;
       });
     } else {
-      return alert("This personId is not registered. Please try again.");
+      return alert(
+        "This dentist personId is not registered. Please try again."
+      );
     }
   };
 
@@ -48,37 +52,41 @@ class Main extends Component {
       (patient) => patient.personId === patientId
     );
 
+    this.state.appointments.map((appointment) => {
+      if (appointment.patient.personId === patientId) {
+        let id = appointment.id;
+        let indexOfAppointment = this.state.appointments.findIndex(
+          (appointment) => appointment.id === id
+        );
+
+        console.log(indexOfAppointment);
+        this.state.appointments.splice(indexOfAppointment, 1);
+
+        this.setState((prevState) => {
+          let newState = { ...prevState };
+          console.log(newState.appointments);
+          return newState;
+        });
+      }
+    });
+
     if (indexOfPatient !== -1) {
+      let patientList = [...this.state.patients];
+      let healthStatus = patientList[indexOfPatient].isSick;
+
       this.setState((prevState) => {
-        let patientList = [...prevState.dentists];
-        patientList[indexOfPatient].isSick = true;
+        patientList[indexOfPatient].isSick = !healthStatus;
         let newState = { ...prevState, patients: patientList };
         return newState;
       });
+    } else {
+      return alert(
+        "This dentist personId is not registered. Please try again."
+      );
     }
-    return alert("This personId is not registered. Please try again.");
   };
 
-  addAppointment = (
-    chooseDayNumber,
-    chooseTime,
-    patientId,
-    chooseDentistId,
-    needsAssistance,
-    assistantId
-  ) => {
-    const appointment = {
-      id: `appointment${Math.random().toString(36).substr(2, 9)}`,
-      day: chooseDayNumber,
-      time: chooseTime,
-      patient: patientId,
-      dentist: chooseDentistId,
-    };
-
-    if (needsAssistance) {
-      appointment.assistant = assistantId;
-    }
-
+  addAppointment = (appointment) => {
     this.setState({
       appointments: this.state.appointments.concat(appointment),
     });
@@ -86,8 +94,10 @@ class Main extends Component {
 
   deleteAppointment = (appointmentId) => {
     let indexOfAppointment = this.state.appointments.findIndex(
-      (appointment) => appointment.appointmentId === appointmentId
+      (appointment) => appointment.id === appointmentId
     );
+
+    console.log(indexOfAppointment);
 
     this.setState({
       appointments: this.state.appointments.splice(indexOfAppointment, 1),
@@ -99,7 +109,10 @@ class Main extends Component {
       <main>
         <Switch>
           <Route path="/calendar">
-            <Calendar appointments={this.state.appointments} />
+            <Calendar
+              appointments={this.state.appointments}
+              patients={this.state.patient}
+            />
           </Route>
           <Route path="/day">
             <Day
@@ -110,6 +123,7 @@ class Main extends Component {
           </Route>
           <Route path="/">
             <Home
+              database={this.state}
               state={this.state}
               deleteAppointment={this.deleteAppointment}
               addAppointment={this.addAppointment}

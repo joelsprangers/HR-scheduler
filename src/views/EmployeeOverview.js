@@ -24,10 +24,16 @@ const EmployeeOverview = (props) => {
               return (
                 <tr key={dentist.personId} className="dentist-row">
                   <td key="dentist-name" className="dentist-item">
-                    {dentist.name === "" ? "unknown" : dentist.name}
+                    {dentist.name === ""
+                      ? "unknown"
+                      : dentist.name.split(" ")[0]}
                   </td>
                   <td key="dentist-surname" className="dentist-item">
-                    {dentist.surname === "" ? "unknown" : dentist.surname}
+                    {dentist.surname === ""
+                      ? "unknown"
+                      : `${dentist.name.split(" ").slice(1, -1)} ${
+                          dentist.surname
+                        }`}
                   </td>
                   <td key="dentist-personId" className="dentist-item">
                     {dentist.personId === "" ? "unknown" : dentist.personId}
@@ -67,10 +73,16 @@ const EmployeeOverview = (props) => {
               return (
                 <tr key={assistant.personId} className="assistant-row">
                   <td key="assistant-name" className="assistant-item">
-                    {assistant.name === "" ? "unknown" : assistant.name}
+                    {assistant.name === ""
+                      ? "unknown"
+                      : assistant.name.split(" ")[0]}
                   </td>
                   <td key="assistant-surname" className="assistant-item">
-                    {assistant.surname === "" ? "unknown" : assistant.surname}
+                    {assistant.surname === ""
+                      ? "unknown"
+                      : `${assistant.name.split(" ").slice(1, -1)} ${
+                          assistant.surname
+                        }`}
                   </td>
                   <td key="assistant-personId" className="assistant-item">
                     {assistant.personId === "" ? "unknown" : assistant.personId}

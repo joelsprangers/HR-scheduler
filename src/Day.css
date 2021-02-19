@@ -15,6 +15,10 @@
   padding: 10px;
 }
 
+.text-red {
+  color: red;
+}
+
 .dayview .time {
   float: right;
   background-color: aquamarine;

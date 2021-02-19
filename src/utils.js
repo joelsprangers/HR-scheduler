@@ -111,12 +111,14 @@ const generateRandomAppointment = (people) => {
     id: `appointment${createId()}`,
     day: getRandomWeekday(),
     time: getRandomTime(),
-    patient: getRandomPerson(people.patients).personId,
-    dentist: getRandomPerson(people.dentists).personId,
+    patient: getRandomPerson(people.patients),
+    dentist: getRandomPerson(people.dentists),
   };
 
   if (Math.random() < 0.5) {
-    appointment.assistant = getRandomPerson(people.assistants).personId;
+    appointment.assistant = getRandomPerson(people.assistants).name.split(
+      " "
+    )[0];
   }
 
   return appointment;

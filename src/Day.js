@@ -3,8 +3,9 @@ import "./Day.css";
 import AppointmentInDay from "./AppointmentInDay";
 
 export default ({ appointments }) => {
-  const appointmentsJSX = appointments.map(
-    ({ time, patient, dentist, assistant }, index) => (
+  const appointmentsJSX = appointments
+    .sort((a, b) => a.time - b.time)
+    .map(({ time, patient, dentist, assistant }, index) => (
       <AppointmentInDay
         time={time}
         patient={patient}
@@ -12,7 +13,6 @@ export default ({ appointments }) => {
         assistant={assistant}
         key={index}
       />
-    )
-  );
+    ));
   return <ul className="dayview">{appointmentsJSX}</ul>;
 };
