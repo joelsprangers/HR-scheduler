@@ -12,7 +12,6 @@ import AppointmentOverview from "./views/AppointmentOverview";
 
 export default (props) => (
   <div>
-    <EmployeeOveriew state={props.state} />
     <DentistForm addDentist={props.addDentist} />
     <PatientForm addPatient={props.addPatient} />
     <FormSick dentistSick={props.dentistSick} patientSick={props.patientSick} />
@@ -22,6 +21,7 @@ export default (props) => (
     />
     <FormDeleteAppointment deleteAppointment={props.deleteAppointment} />
     <FormChangeAppointment changeAppointment={props.changeAppointment} />
+    <EmployeeOveriew state={props.state} />
     <PatientOverview state={props.state} />
     <AppointmentOverview state={props.state} />
   </div>
