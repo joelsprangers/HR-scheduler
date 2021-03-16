@@ -9,6 +9,7 @@ export default ({ appointments }) => {
         patient={patient}
         dentist={dentist}
         key={index}
+        appointmentId={appointments.appointmentId}
       />
     )
   );

@@ -9,13 +9,15 @@ import createInitialState from "./utils";
 
 class Main extends Component {
   constructor() {
+    //bij mij staat super() doorgestreept. Waarom is dit?
     super();
     this.state = createInitialState();
-
+    //moet onderstaande binding?
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.addAppointment = this.addAppointment.bind(this);
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.makePatientSick = this.makePatientSick.bind(this);
+    this.changeAppointment = this.changeAppointment.bind(this);
   }
 
   addDentist = (dentist) => {
@@ -59,12 +61,11 @@ class Main extends Component {
           (appointment) => appointment.id === id
         );
 
-        console.log(indexOfAppointment);
-        this.state.appointments.splice(indexOfAppointment, 1);
-
+        let copyOfAppointments = this.state.appointments;
+        // waarom werkt dit niet? let copyOfAppointments = [...this.state.appointments];
+        copyOfAppointments.splice(indexOfAppointment, 1);
         this.setState((prevState) => {
-          let newState = { ...prevState };
-          console.log(newState.appointments);
+          let newState = { ...prevState, appointments: copyOfAppointments };
           return newState;
         });
       }
@@ -97,10 +98,27 @@ class Main extends Component {
       (appointment) => appointment.id === appointmentId
     );
 
-    console.log(indexOfAppointment);
+    let copyOfAppointments = this.state.appointments;
+    copyOfAppointments.splice(indexOfAppointment, 1);
+    this.setState((prevState) => {
+      let newState = { ...prevState, appointments: copyOfAppointments };
+      return newState;
+    });
+  };
 
-    this.setState({
-      appointments: this.state.appointments.splice(indexOfAppointment, 1),
+  changeAppointment = (id, newDay, newTime) => {
+    let indexOfAppointment = this.state.appointments.findIndex(
+      (appointment) => appointment.id === id
+    );
+
+    let copyOfAppointments = this.state.appointments;
+
+    copyOfAppointments[indexOfAppointment].day = newDay;
+    copyOfAppointments[indexOfAppointment].time = newTime;
+
+    this.setState((prevState) => {
+      let newState = { ...prevState, appointments: copyOfAppointments };
+      return newState;
     });
   };
 
@@ -126,6 +144,7 @@ class Main extends Component {
               database={this.state}
               state={this.state}
               deleteAppointment={this.deleteAppointment}
+              changeAppointment={this.changeAppointment}
               addAppointment={this.addAppointment}
               addDentist={this.addDentist}
               addPatient={this.addPatient}

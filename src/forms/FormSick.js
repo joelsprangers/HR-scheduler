@@ -6,8 +6,8 @@ class FormSick extends Component {
     patientId: "",
   };
 
-  onSubmitDentist = (e) => {
-    e.preventDefault();
+  onSubmitDentist = (event) => {
+    event.preventDefault();
     let dentistId = this.state.dentistId;
     this.props.dentistSick(dentistId);
     this.setState({
@@ -16,8 +16,8 @@ class FormSick extends Component {
     });
   };
 
-  onSubmitPatient = (e) => {
-    e.preventDefault();
+  onSubmitPatient = (event) => {
+    event.preventDefault();
     let patientId = this.state.patientId;
     this.props.patientSick(patientId);
     this.setState({

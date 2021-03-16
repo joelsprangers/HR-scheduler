@@ -3,7 +3,6 @@ import React from "react";
 const EmployeeOverview = (props) => {
   let dentistList = props.state.dentists;
   let assistantList = props.state.assistants;
-  console.log(dentistList);
 
   return (
     <div>
@@ -16,7 +15,6 @@ const EmployeeOverview = (props) => {
               <th className="dentist-row__item">last name</th>
               <th className="dentist-row__item">person id</th>
               <th className="dentist-row__item">status</th>
-              <th className="dentist-row__item">delete</th>
             </tr>
           </thead>
           <tbody className="dentist-list">
@@ -41,15 +39,6 @@ const EmployeeOverview = (props) => {
                   <td key="dentist-isSick" className="dentist-item">
                     {dentist.isSick ? "is sick" : "healthy"}
                   </td>
-                  <td
-                    className="dentist-delete"
-                    id={dentist.personId}
-                    key={dentist.personId}
-                    //onClick={props.}
-                  >
-                    {" "}
-                    --delete--{" "}
-                  </td>
                 </tr>
               );
             })}
@@ -65,7 +54,6 @@ const EmployeeOverview = (props) => {
               <th className="row__item">last name</th>
               <th className="row__item">person id</th>
               <th className="row__item">status</th>
-              <th className="row__item">delete</th>
             </tr>
           </thead>
           <tbody className="assistant-list">
@@ -89,15 +77,6 @@ const EmployeeOverview = (props) => {
                   </td>
                   <td key="assistant-isSick" className="assistant-item">
                     {assistant.isSick ? "is sick" : "healthy"}
-                  </td>
-                  <td
-                    className="assistant-delete"
-                    id={assistant.personId}
-                    key={assistant.personId}
-                    //onClick={props.}
-                  >
-                    {" "}
-                    --delete--{" "}
                   </td>
                 </tr>
               );

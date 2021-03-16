@@ -23,7 +23,11 @@ export default ({ appointments }) => {
   const daysInMonthJSX = Object.values(
     appointmentsByDay
   ).map((appointmentsInDay, index) => (
-    <DayInMonth appointments={appointmentsInDay} key={index} />
+    <DayInMonth
+      appointments={appointmentsInDay}
+      appointmentId={appointments.appointmentId}
+      key={index}
+    />
   ));
 
   return (

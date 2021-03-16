@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class FormAppointment extends Component {
   state = {
-    appointmentId: `appointment_${Math.random().toString(36).substr(2, 9)}`,
+    id: `appointment_${Math.random().toString(36).substr(2, 9)}`,
     day: "",
     time: "",
     patientId: "",
@@ -24,18 +24,17 @@ class FormAppointment extends Component {
     );
 
     let appointment = {
-      appointmentId: this.state.appointmentId,
+      id: this.state.id,
       day: this.state.day,
       time: this.state.time,
       patient: this.props.database.patients[indexOfPatient],
       dentist: this.props.database.dentists[indexOfDentist],
       assistant: this.props.database.assistants[indexOfAssistant],
     };
-    console.log(appointment);
 
     this.props.addAppointment(appointment);
     this.setState({
-      appointmentId: `appointment_${Math.random().toString(36).substr(2, 9)}`,
+      id: `appointment_${Math.random().toString(36).substr(2, 9)}`,
       day: "",
       time: "",
       patientId: "",

@@ -14,7 +14,6 @@ const PatientOverview = (props) => {
             <th className="patient-row__item">person id</th>
             <th className="patient-row__item">birth year</th>
             <th className="patient-row__item">status</th>
-            <th className="patient-row__item">delete</th>
           </tr>
         </thead>
         <tbody className="patient-list">
@@ -39,15 +38,6 @@ const PatientOverview = (props) => {
                 </td>
                 <td key="patient-isSick" className="patient-item">
                   {patient.isSick ? "is sick" : "healthy"}
-                </td>
-                <td
-                  className="patient-delete"
-                  id={patient.personId}
-                  key={patient.personId}
-                  //onClick={props.}
-                >
-                  {" "}
-                  --delete--{" "}
                 </td>
               </tr>
             );
